@@ -1,0 +1,33 @@
+{
+  "name": "tanishk",
+  "title": "DEVELOPER",
+  "description": "LEARNIG TOWARD NEW TECHNOLOGY",
+  "profileImage": "https://img.magnific.com/premium-vector/business-man-avatar-profile_1133257-2431.jpg?semt=ais_hybrid&w=740&q=80",
+  "email": "tanishkkumar944@gmail.com",
+  "phone": "9546834248",
+  "location": "PURNEA , BIHAR",
+  "resumeUrl": "https://img.magnific.com/premium-vector/business-man-avatar-profile_1133257-2431.jpg?semt=ais_hybrid&w=740&q=80",
+  "github": "https://img.magnific.com/premium-vector/business-man-avatar-profile_1133257-2431.jpg?semt=ais_hybrid&w=740&q=80",
+  "linkedin": "https://img.magnific.com/premium-vector/business-man-avatar-profile_1133257-2431.jpg?semt=ais_hybrid&w=740&q=80",
+  "twitter": "https://img.magnific.com/premium-vector/business-man-avatar-profile_1133257-2431.jpg?semt=ais_hybrid&w=740&q=80",
+  "instagram": "https://img.magnific.com/premium-vector/business-man-avatar-profile_1133257-2431.jpg?semt=ais_hybrid&w=740&q=80",
+  "portfolio": "https://img.magnific.com/premium-vector/business-man-avatar-profile_1133257-2431.jpg?semt=ais_hybrid&w=740&q=80",
+  "about": "I AM TANISHK KUMAR ",
+  "skills": "HTML,CSS,JAVA",
+  "education": [
+    {
+      "degree": "BTECH",
+      "fieldOfStudy": "CSE",
+      "institution": "VVIT",
+      "startYear": "2025",
+      "endYear": "2029",
+      "grade": "7"
+    }
+  ],
+  "internships": [],
+  "projects": [],
+  "certifications": [],
+  "achievements": [],
+  "activities": [],
+  "openToInternships": true
+}

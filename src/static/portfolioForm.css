@@ -1,0 +1,125 @@
+ .form-page {
+     max-width: 900px;
+ }
+
+ .page-intro {
+     max-width: 660px;
+     margin-bottom: 38px;
+ }
+
+ .page-intro h1,
+ .contact-intro h1 {
+     margin: 0 0 16px;
+     font-size: clamp(2.6rem, 7vw, 5.5rem);
+     letter-spacing: -2px;
+ }
+
+ .page-intro>p:last-child,
+ .contact-intro>p {
+     color: var(--muted);
+     font-size: 1.05rem;
+ }
+
+ #portfolioForm {
+     padding: clamp(24px, 5vw, 52px);
+     background: var(--surface);
+     box-shadow: var(--shadow);
+ }
+
+ #portfolioForm h2 {
+     margin-top: 38px;
+     padding-top: 30px;
+     border-top: 1px solid var(--line);
+     font-size: 1.25rem;
+ }
+
+ #portfolioForm h2:first-child {
+     margin-top: 0;
+     padding-top: 0;
+     border-top: 0;
+ }
+
+ #portfolioForm input:not([type='checkbox']),
+ #portfolioForm textarea,
+ .contact-form input,
+ .contact-form textarea {
+     width: 100%;
+     margin: 7px 0 12px;
+     padding: 13px 14px;
+     border: 1px solid var(--line);
+     border-radius: 2px;
+     background: #fff;
+     color: var(--ink);
+     font: inherit;
+ }
+
+ #portfolioForm textarea,
+ .contact-form textarea {
+     resize: vertical;
+ }
+
+ #portfolioForm input:focus,
+ #portfolioForm textarea:focus,
+ .contact-form input:focus,
+ .contact-form textarea:focus {
+     outline: 2px solid #efb3a3;
+     border-color: var(--accent);
+ }
+
+ .repeater-row {
+     display: grid;
+     grid-template-columns: repeat(2, minmax(0, 1fr));
+     gap: 4px 12px;
+     margin: 10px 0;
+     padding: 16px;
+     border: 1px solid var(--line);
+     background: #faf8f3;
+ }
+
+ .repeater-row button {
+     width: max-content;
+     padding: 6px 10px;
+     border: 0;
+     background: transparent;
+     color: var(--accent-dark);
+     cursor: pointer;
+ }
+
+ #portfolioForm>button[type='button'] {
+     margin-bottom: 8px;
+     padding: 9px 13px;
+     border: 1px dashed var(--accent);
+     background: transparent;
+     color: var(--accent-dark);
+     cursor: pointer;
+ }
+
+ #portfolioForm label {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     color: var(--muted);
+ }
+
+ .form-actions {
+     display: flex;
+     justify-content: flex-end;
+     gap: 12px;
+     margin-top: 42px;
+     padding-top: 25px;
+     border-top: 1px solid var(--line);
+ }
+
+ @media (max-width: 600px) {
+     .repeater-row {
+         grid-template-columns: 1fr;
+     }
+
+     .form-actions {
+         flex-direction: column-reverse;
+     }
+
+     .form-actions .button {
+         width: 100%;
+     }
+ }

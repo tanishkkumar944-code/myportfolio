@@ -1,0 +1,145 @@
+<main class="page-shell home-page">
+<section class="hero">
+    <% if (portfolio.profileImage) { %>
+        <img src="<%= portfolio.profileImage %>" alt="<%= portfolio.name %>">
+    <% } %>
+    <div class="hero-copy">
+    <p class="eyebrow">Available for meaningful work</p>
+    <h1><%= portfolio.name || 'Your Name' %></h1>
+    <% if (portfolio.title) { %><p class="title"><%= portfolio.title %></p><% } %>
+    <% if (portfolio.description) { %><p class="description"><%= portfolio.description %></p><% } %>
+
+    <div class="links">
+        <% if (portfolio.email) { %><a href="mailto:<%= portfolio.email %>">Email</a><% } %>
+        <% if (portfolio.phone) { %><span><%= portfolio.phone %></span><% } %>
+        <% if (portfolio.location) { %><span><%= portfolio.location %></span><% } %>
+        <% if (portfolio.resumeUrl) { %><a href="<%= portfolio.resumeUrl %>" target="_blank">Resume</a><% } %>
+        <% if (portfolio.github) { %><a href="<%= portfolio.github %>" target="_blank">GitHub</a><% } %>
+        <% if (portfolio.linkedin) { %><a href="<%= portfolio.linkedin %>" target="_blank">LinkedIn</a><% } %>
+        <% if (portfolio.twitter) { %><a href="<%= portfolio.twitter %>" target="_blank">Twitter</a><% } %>
+        <% if (portfolio.instagram) { %><a href="<%= portfolio.instagram %>" target="_blank">Instagram</a><% } %>
+        <% if (portfolio.portfolio) { %><a href="<%= portfolio.portfolio %>" target="_blank">Website</a><% } %>
+    </div>
+
+    <% if (portfolio.openToInternships) { %>
+        <p class="badge">Open to internships</p>
+    <% } %>
+    <div class="hero-actions">
+        <a class="button button-primary" href="/contactForm">Start a conversation</a>
+        <a class="button button-secondary" href="/portfolio-form">Update portfolio</a>
+    </div>
+    </div>
+</section>
+
+<% if (portfolio.about) { %>
+<section>
+    <h2 id="about">About</h2>
+    <p><%= portfolio.about %></p>
+</section>
+<% } %>
+
+<% if (portfolio.skills) { %>
+<section>
+    <h2>Skills</h2>
+    <ul class="skills-list">
+        <% portfolio.skills.split(',').map(s => s.trim()).filter(Boolean).forEach(skill => { %>
+            <li><%= skill %></li>
+        <% }) %>
+    </ul>
+</section>
+<% } %>
+
+<% if (portfolio.education && portfolio.education.length > 0) { %>
+<section id="education">
+    <h2>Education</h2>
+    <% portfolio.education.forEach(edu => { %>
+        <div class="card">
+            <h3><%= edu.degree %><% if (edu.fieldOfStudy) { %> — <%= edu.fieldOfStudy %><% } %></h3>
+            <% if (edu.institution) { %><p><%= edu.institution %></p><% } %>
+            <p>
+                <% if (edu.startYear || edu.endYear) { %><%= edu.startYear %> - <%= edu.endYear %><% } %>
+                <% if (edu.grade) { %> | Grade: <%= edu.grade %><% } %>
+            </p>
+        </div>
+    <% }) %>
+</section>
+<% } %>
+
+<% if (portfolio.projects && portfolio.projects.length > 0) { %>
+<section>
+    <h2>Projects</h2>
+    <% portfolio.projects.forEach(project => { %>
+        <div class="card">
+            <h3><%= project.title %></h3>
+            <% if (project.description) { %><p><%= project.description %></p><% } %>
+            <% if (project.techStack) { %>
+                <p class="tech-stack">
+                    <% project.techStack.split(',').map(t => t.trim()).filter(Boolean).forEach(tech => { %>
+                        <span class="tag"><%= tech %></span>
+                    <% }) %>
+                </p>
+            <% } %>
+            <% if (project.link) { %><a href="<%= project.link %>" target="_blank">View Project</a><% } %>
+        </div>
+    <% }) %>
+</section>
+<% } %>
+
+<% if (portfolio.internships && portfolio.internships.length > 0) { %>
+<section>
+    <h2>Internships / Experience</h2>
+    <% portfolio.internships.forEach(internship => { %>
+        <div class="card">
+            <h3><%= internship.role %><% if (internship.company) { %> @ <%= internship.company %><% } %></h3>
+            <% if (internship.duration) { %><p class="duration"><%= internship.duration %></p><% } %>
+            <% if (internship.description) { %><p><%= internship.description %></p><% } %>
+        </div>
+    <% }) %>
+</section>
+<% } %>
+
+<% if (portfolio.certifications && portfolio.certifications.length > 0) { %>
+<section>
+    <h2>Certifications</h2>
+    <% portfolio.certifications.forEach(cert => { %>
+        <div class="card">
+            <h3><%= cert.title %></h3>
+            <p>
+                <% if (cert.issuer) { %><%= cert.issuer %><% } %>
+                <% if (cert.date) { %> — <%= cert.date %><% } %>
+            </p>
+        </div>
+    <% }) %>
+</section>
+<% } %>
+
+<% if (portfolio.achievements && portfolio.achievements.length > 0) { %>
+<section>
+    <h2>Achievements</h2>
+    <% portfolio.achievements.forEach(ach => { %>
+        <div class="card">
+            <h3><%= ach.title %></h3>
+            <% if (ach.description) { %><p><%= ach.description %></p><% } %>
+        </div>
+    <% }) %>
+</section>
+<% } %>
+
+<% if (portfolio.activities && portfolio.activities.length > 0) { %>
+<section>
+    <h2>Activities</h2>
+    <% portfolio.activities.forEach(activity => { %>
+        <div class="card">
+            <h3><%= activity.title %></h3>
+            <% if (activity.description) { %><p><%= activity.description %></p><% } %>
+        </div>
+    <% }) %>
+</section>
+<% } %>
+
+<section class="closing-cta">
+    <p class="eyebrow">Have a project in mind?</p>
+    <h2>Let’s make something useful.</h2>
+    <a class="button button-primary" href="/contactForm">Get in touch</a>
+</section>
+</main>

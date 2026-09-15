@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title || 'Portfolio' %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/home.css">
+    <% if (css && css !== 'home.css') { %><link rel="stylesheet" href="/<%= css %>"><% } %>
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="/">Portfolio<span>.</span></a>
+        <nav class="site-nav" aria-label="Main navigation">
+            <a href="/" class="<%= page === 'home' ? 'active' : '' %>">Home</a>
+            <a href="/portfolio-form" class="<%= page === 'form' ? 'active' : '' %>">Edit portfolio</a>
+            <a href="/contactForm" class="<%= page === 'contact' ? 'active' : '' %>">Contact</a>
+        </nav>
+    </header>
+    <%-body%>
+    <footer class="site-footer">Built to show the work that matters.</footer>
+</body>
+</html>

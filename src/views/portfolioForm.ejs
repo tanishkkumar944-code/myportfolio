@@ -1,0 +1,159 @@
+<main class="page-shell form-page">
+<div class="page-intro">
+    <p class="eyebrow">Portfolio builder</p>
+    <h1>Shape your professional story.</h1>
+    <p>Add the details you want visitors and collaborators to see. You can return to the live portfolio at any time.</p>
+</div>
+<form method="POST" action="/portfolioForm" id="portfolioForm">
+    <h2>Basic Info</h2>
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="text" name="title" placeholder="Title: e.g. B.Tech Student | Aspiring Developer">
+    <input type="text" name="description" placeholder="Portfolio Description" required>
+    <textarea name="about" placeholder="About you"></textarea>
+    <input type="text" name="profileImage" placeholder="Profile Image URL">
+
+    <h2>Contact</h2>
+    <input type="email" name="email" placeholder="Email">
+    <input type="text" name="phone" placeholder="Phone">
+    <input type="text" name="location" placeholder="City, State">
+
+    <h2>Links</h2>
+    <input type="text" name="resumeUrl" placeholder="Resume link">
+    <input type="text" name="github" placeholder="GitHub URL">
+    <input type="text" name="linkedin" placeholder="LinkedIn URL">
+    <input type="text" name="twitter" placeholder="Twitter URL">
+    <input type="text" name="instagram" placeholder="Instagram URL">
+    <input type="text" name="portfolio" placeholder="Other portfolio/website link">
+
+    <h2>Education</h2>
+    <div class="repeater" id="educationRepeater"></div>
+    <button type="button" data-add="education">+ Add Education</button>
+    <input type="hidden" name="education" id="educationInput">
+
+    <h2>Skills</h2>
+    <input type="text" name="skills" placeholder="Skills, comma-separated (e.g. HTML, CSS, JavaScript, Node.js)">
+
+    <h2>Projects</h2>
+    <div class="repeater" id="projectsRepeater"></div>
+    <button type="button" data-add="projects">+ Add Project</button>
+    <input type="hidden" name="projects" id="projectsInput">
+
+    <h2>Internships / Experience</h2>
+    <div class="repeater" id="internshipsRepeater"></div>
+    <button type="button" data-add="internships">+ Add Internship</button>
+    <input type="hidden" name="internships" id="internshipsInput">
+
+    <h2>Achievements</h2>
+    <div class="repeater" id="achievementsRepeater"></div>
+    <button type="button" data-add="achievements">+ Add Achievement</button>
+    <input type="hidden" name="achievements" id="achievementsInput">
+
+    <h2>Certifications</h2>
+    <div class="repeater" id="certificationsRepeater"></div>
+    <button type="button" data-add="certifications">+ Add Certification</button>
+    <input type="hidden" name="certifications" id="certificationsInput">
+
+    <h2>Activities</h2>
+    <div class="repeater" id="activitiesRepeater"></div>
+    <button type="button" data-add="activities">+ Add Activity</button>
+    <input type="hidden" name="activities" id="activitiesInput">
+
+    <h2>Availability</h2>
+    <label>
+        <input type="checkbox" name="openToInternships">
+        Open to internships
+    </label>
+
+    <div class="form-actions">
+        <a class="button button-secondary" href="/">Cancel</a>
+        <button class="button button-primary" type="submit">Save portfolio</button>
+    </div>
+</form>
+</main>
+
+<script>
+    // Field definitions per repeater section: [key, placeholder, tag ('input' or 'textarea')]
+    const REPEATER_CONFIG = {
+        education: [
+            ['degree', 'Degree (e.g. B.Tech, XII, X)', 'input'],
+            ['fieldOfStudy', 'Field of Study / Stream', 'input'],
+            ['institution', 'School/College/Institution Name', 'input'],
+            ['startYear', 'Start Year', 'input'],
+            ['endYear', 'End Year (or Expected)', 'input'],
+            ['grade', 'Grade/CGPA/Percentage', 'input']
+        ],
+        projects: [
+            ['title', 'Project Title', 'input'],
+            ['description', 'Project Description', 'textarea'],
+            ['techStack', 'Tech Stack (comma-separated)', 'input'],
+            ['link', 'Repo/Live Link', 'input']
+        ],
+        internships: [
+            ['company', 'Company/Organization', 'input'],
+            ['role', 'Role', 'input'],
+            ['duration', 'Duration (e.g. Jun 2026 - Aug 2026)', 'input'],
+            ['description', 'What you did', 'textarea']
+        ],
+        achievements: [
+            ['title', 'Achievement Title', 'input'],
+            ['description', 'Description', 'textarea']
+        ],
+        certifications: [
+            ['title', 'Certification Title', 'input'],
+            ['issuer', 'Issued By', 'input'],
+            ['date', 'Date', 'input']
+        ],
+        activities: [
+            ['title', 'Activity Title', 'input'],
+            ['description', 'Description', 'textarea']
+        ]
+    };
+    function createRow(section, fields) {
+        const row = document.createElement('div');
+        row.className = 'repeater-row';
+
+        fields.forEach(([key, placeholder, tag]) => {
+            const el = document.createElement(tag);
+            el.placeholder = placeholder;
+            el.dataset.field = key;
+            row.appendChild(el);
+        });
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.textContent = 'Remove';
+        removeBtn.addEventListener('click', () => row.remove());
+        row.appendChild(removeBtn);
+
+        return row;
+    }
+
+    Object.keys(REPEATER_CONFIG).forEach((section) => {
+        const container = document.getElementById(`${section}Repeater`);
+        const addBtn = document.querySelector(`[data-add="${section}"]`);
+
+        addBtn.addEventListener('click', () => {
+            container.appendChild(createRow(section, REPEATER_CONFIG[section]));
+        });
+    });
+
+    document.getElementById('portfolioForm').addEventListener('submit', () => {
+        Object.keys(REPEATER_CONFIG).forEach((section) => {
+            const container = document.getElementById(`${section}Repeater`);
+            const rows = Array.from(container.querySelectorAll('.repeater-row'));
+
+            const data = rows
+                .map((row) => {
+                    const entry = {};
+                    row.querySelectorAll('[data-field]').forEach((field) => {
+                        entry[field.dataset.field] = field.value.trim();
+                    });
+                    return entry;
+                })
+                // drop fully empty rows (e.g. added but never filled in)
+                .filter((entry) => Object.values(entry).some((v) => v !== ''));
+
+            document.getElementById(`${section}Input`).value = JSON.stringify(data);
+        });
+    });
+</script>
